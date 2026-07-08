@@ -4,13 +4,16 @@ import com.laura.secret_messages_backend.model.Message;
 import com.laura.secret_messages_backend.repository.MessageRepository;
 import com.laura.secret_messages_backend.repository.UserRepository;
 import com.laura.secret_messages_backend.service.api.MessageService;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+@Service
 public class MessageServiceImpl implements MessageService {
     private final MessageRepository messageRepository;
     private final UserRepository userRepository;
@@ -33,8 +36,10 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public List<Message> getDialogue(String sender, String recipient) {
-        return messageRepository.findBySenderUsernameAndRecipientUsername(sender, recipient)
-                .stream().sorted(Comparator.comparing(Message::getSendTime))
+        return Stream.concat(
+                messageRepository.findBySenderUsernameAndRecipientUsername(sender, recipient).stream(),
+                        messageRepository.findBySenderUsernameAndRecipientUsername(recipient, sender).stream()
+                ).sorted(Comparator.comparing(Message::getSendTime))
                 .collect(Collectors.toList());
     }
 }
