@@ -34,9 +34,6 @@ export default function RegisterForm() {
                 value={password}
                 onChange={e => setPassword(e.target.value)}
             />
-            <label>
-                Submit
-            </label>
             <button onClick={handleSubmit}>Register</button>
             <p>{message}</p>
         </div>

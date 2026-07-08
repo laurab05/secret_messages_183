@@ -34,9 +34,6 @@ export default function LoginForm() {
                 value={password}
                 onChange={e => setPassword(e.target.value)}
             />
-            <label>
-                Submit
-            </label>
             <button onClick={handleSubmit}>Login</button>
             <p>{message}</p>
         </div>
