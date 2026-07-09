@@ -1,9 +1,18 @@
 package com.laura.secret_messages_backend.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.Objects;
-
+@Data
+@NoArgsConstructor
+@Entity
+@Table(name = "users")
 
 @Entity
 @Table(name="APP_USERS")
